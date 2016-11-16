@@ -1,6 +1,7 @@
 import os
 from tkinter import *
 import tkinter as tk
+from tkinter import messagebox
 import sqlite3
 
 # Import other modules
@@ -26,7 +27,7 @@ def ask_quit(self):
     if messagebox.askokcancel("Exit program", "Okay to exit application?"):
         # This closes the app
         self.master.destroy()
-        os_exit(0)
+        os._exit(0)
 
 
 #============================================================================================
@@ -41,7 +42,7 @@ def create_db(self):
             col_lname TEXT, \
             col_fullname TEXT, \
             col_phone TEXT, \
-            col_email TEXT, \
+            col_email TEXT \
             );")
         # Must coomit() to save changes & close the database connection
         conn.commit()
@@ -55,8 +56,7 @@ def first_run(self):
         cur = conn.cursor()
         cur,count = count_records(cur)
         if count < 1:
-            cur.execute("""INSERT INTO tbl_phonebook (col_fname, col_lname, col_fullname,col_phone
-                            col_email VALUES (?,?,?,?,?)""")
+            cur.execute("""INSERT INTO tbl_phonebook (col_fname, col_lname, col_fullname,col_phone, col_email) VALUES (?,?,?,?,?)""", (data))
     conn.close()
             
 
@@ -126,7 +126,7 @@ def addToList(self):
             chkName = count
             if chkName == 0: # If this is 0, there is no existance of the fullname and we can add new data
                 print("chkName: {}".format(chkName))
-                cursor.execute(""" INSERT INTO tbl_phonebook (col_fname, col_lname, col_phone, col_email) VALUES (?,?,?,?)""")
+                cursor.execute(""" INSERT INTO tbl_phonebook (col_fname, col_lname, col_phone, col_email) VALUES (?,?,?,?)""", (var_fname,var_lname,var_phone,var_email))
                 self.lstList1.insert(END, var_fullname) # Update list box with new name
                 onClear(self) #call the function to clear all of the textboxes
             else:
@@ -239,5 +239,4 @@ def onUpdate(self):
 if __name__ == "__main__":
     pass
     
-                                       
-        
+                                  
