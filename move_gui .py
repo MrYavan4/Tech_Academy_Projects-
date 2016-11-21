@@ -1,3 +1,8 @@
+# Author Tanvir Khondakar 
+#
+# Python 3.6 
+
+
 from tkinter import *
 import tkinter as tk
 import os
@@ -12,7 +17,8 @@ class Move_GUI():
     def __init__(self, master):
         self.master = master
         master.title("File Transfer")
-
+        
+        # Setting the window size
         master.minsize(width=300, height=400)
         master.maxsize(width=300, height=400)
 
