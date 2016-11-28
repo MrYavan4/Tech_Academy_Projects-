@@ -121,7 +121,7 @@ def transfer_select(self):
                 cur.execute(""" SELECT unix FROM move_table""")
 
                 now = cur.fetchone()[0]
-                update = now - 60*60*24 # Calculate unix time for last 24 hours
+                update = now - 60*60*24 # Calculate unix time by subtracting 24 hours from the last time in the database
 
                 # Get dates for new and modded files
                 new_file = os.path.getctime(filename)
