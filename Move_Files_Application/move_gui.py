@@ -26,7 +26,7 @@ def load_gui(self):
     self.lbl_dst = tk.Label(self.master, text = 'Destination Folder:')
     self.lbl_dst.grid(row = 3, column = 0,
                         padx =(20, 10), pady =(10, 0), sticky = N+W)
-    self.lbl_transfer = tk.Label(self.master, text = 'Last Files Transfers Performed:')
+    self.lbl_transfer = tk.Label(self.master, text = 'Last File Check Performed:')
     self.lbl_transfer.grid(row = 0, column = 2,
                         padx =(0, 10), pady =(10, 0), sticky = N+W)
 
