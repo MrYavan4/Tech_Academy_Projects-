@@ -1,36 +1,24 @@
-﻿using System;
+using System;
 
-namespace OverloadingvsOverriding
+namespace Program1
 {
-    public class test
+    class Program
     {
-
-/* Overloading is the act of having multiple methods in the same
- * scope, with the same name but different signature
- */
-        public void getStuff(int id)
-        {}
-
-        public void getStuff(string name)
-        {}
-
-/* Overriding is the concept that allows you to change the functionality of a method 
- in a child class*/
-
-        public class test1
+        // This is where the program starts 
+        static void Main(string[] args)
         {
-            public virtual  void something(int id)
-            {
-                //Something goes here
-            }
-        }
+            // Prompt the user to enter a name
+            Console.WriteLine("Enter your name, please: ");
 
-        public class test3 : test1
-        {
-            public override void something(int id)
-            {
-                base.something(id);
-            }
+            //Now read the name entered
+            string name = Console.ReadLine();
+
+            // Great the user with the name that was entered 
+            Console.WriteLine("Hello, " + name);
+
+            //Wait for the user to acknowledge the results 
+            Console.WriteLine("Press Enter to terminate...");
+            Console.Read();              
         }
     }
 }
