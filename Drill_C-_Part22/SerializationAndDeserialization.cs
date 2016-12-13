@@ -1,38 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Serialization
+namespace Serialization_Deserialization
 {
-    class SerialzingData
+    [Serializable]
+    public class Person
     {
-        Stream stream = null;
-        BinaryFormatter bformatter = null;
-        String txtFilename = "";
-        public SerialzingData(string filename)
-        {
-            txtFilename = filename;
-            stream = File.Open(txtFilename, FileMode.Create);
-            bformatter = new BinaryFormatter();
-        }
+        public int age = 0;
+        public String name = null;
 
-        public void SerlializeObject(Object objectToSerialize)
+        static void Main(string[] args)
         {
-            bformatter.Serialize(stream, objectToSerialize);
-        }
+            Person person = new Person();
 
-        public void DeserializeObject()
-        {
-            Object objectToDeserialize = null;
-            stream = File.Open(txtFilename, FileMode.Open);
-        }
-        public void closeStream()
-        {
-            stream.Close();
+            person.age = 30;
+
+            person.name = "James";
+
+            
+            
+            //Serialization Logic Starts
+
+            Stream writerstream = File.Open("filename.txt", FileMode.Create);
+
+            BinaryFormatter binformat = new BinaryFormatter();
+
+            Console.WriteLine("The Persons name is: {0}, and he is {1} yeats old", person.name, person.age);
+
+            binformat.Serialize(writerstream, person);
+
+            writerstream.Close();
+
+            // Serialization Logic Ends
+            
+
+
+            // Deserialization Logic Starts
+
+            person = null;
+
+            Stream streamreader = File.Open("filename.txt", FileMode.Open);
+
+            binformat = new BinaryFormatter();
+
+            Console.WriteLine("Reading Person Information");
+
+            person = (Person)binformat.Deserialize(streamreader);
+
+            streamreader.Close();
+            // Deserialization Logic Ends
         }
     }
 }
