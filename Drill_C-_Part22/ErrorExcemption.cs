@@ -1,22 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System;
 using System.IO;
-
-namespace LoggingErrors
+using System.Text;
+ 
+namespace ErrorExceptionHandeling
 {
-    
-    // Log and exception
-	public static void LogExceptions(Exception exc, string source)
-	{
-        string logFile = @"C:\Users\tanvir\Desktop\Folder_B\test.txt";
-        logFile = httContext.Current.Server.Mypath(logFile);
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Test the logException function. We Assume there is an exception
+            Exception ex = new Exception();
+            LogException("test", "TestLog", ex.ToString());
+        }
 
-        // Open the log file for append and write the log
-        StreamWriter sw = new StreamWriter(logFile, true);
-        sw.WriteLine("********** {0} **********", DateTime.Now);
+        // Creating function write text to log file
 
-        sw.Close();
+        public static void LogException(string strFileName, string strFunctionName, string strContent)
+        {
+            StreamWriter writer = null;
+            StringBuilder strBuilder = null;
+            string dir = @"C:\Users\tanvir\Desktop\C#";
+
+            //Check folder exists
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            string path = Path.Combine(dir, strFileName + ".log");
+            strBuilder = new StringBuilder("Log : ");
+            strBuilder.Append(strFunctionName + " | ");
+            strBuilder.Append(strContent);
+
+            writer = new StreamWriter(path, true);
+            writer.Write(strBuilder);
+            writer.Close();
+        }
     }
 }
